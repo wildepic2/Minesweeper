@@ -9,6 +9,9 @@ void timer();
 void playerInput();
 void wonOrLoose();
 void drawScore();
+void mainMenu();
+
+
 
 int main(void)
 {
