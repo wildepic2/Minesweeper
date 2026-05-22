@@ -18,7 +18,7 @@ enum {
     MAIN_MENU
 } gameState = MAIN_MENU;
 
-bool isCovered[fieldSize][fieldSize] = {true};
+bool isCovered[fieldSize][fieldSize];
 int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void)
@@ -26,7 +26,7 @@ int main(void)
     const int screenWidth = 800;
     const int screenHeight = 450;
 
-    InitWindow(screenWidth, screenHeight, "Changeme!");
+    InitWindow(screenWidth, screenHeight, "MINESWEEPER");
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) {
@@ -34,13 +34,13 @@ int main(void)
         ClearBackground(RAYWHITE);
         switch (gameState) {
             case MAIN_MENU:
-                mainMenu();
+                //mainMenu();
                 break;
             case PLAYING:
 
                 break;
             case GAME_OVER:
-                endGame();
+                //endGame();
                 break;
         }
         EndDrawing();
