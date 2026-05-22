@@ -2,7 +2,7 @@
 #define fieldSize 10
 
 void drawField();
-void generateBomb();
+void generateBombs();
 void calculateNumbers();
 void resetGame();
 void endGame();
@@ -11,6 +11,12 @@ void playerInput();
 void wonOrLoose();
 void drawScore();
 void mainMenu();
+
+enum {
+    PLAYING,
+    GAME_OVER,
+    MAIN_MENU
+} gameState = MAIN_MENU;
 
 bool isCovered[fieldSize][fieldSize] = {true};
 int fieldValue[fieldSize][fieldSize] = {0};
@@ -26,8 +32,17 @@ int main(void)
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText("Hello World!", 350, 200, 20, BLACK);
-        DrawFPS(10, 10);
+        switch (gameState) {
+            case MAIN_MENU:
+                mainMenu();
+                break;
+            case PLAYING:
+
+                break;
+            case GAME_OVER:
+                endGame();
+                break;
+        }
         EndDrawing();
     }
 
