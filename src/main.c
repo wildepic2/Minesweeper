@@ -1,5 +1,15 @@
 #include "raylib.h"
 
+void drawField();
+void generateBomb();
+void calculateNumbers();
+void resetGame();
+void endGame();
+void timer();
+void playerInput();
+void wonOrLoose();
+void drawScore();
+
 int main(void)
 {
     const int screenWidth = 800;
