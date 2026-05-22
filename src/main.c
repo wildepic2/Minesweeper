@@ -1,4 +1,5 @@
 #include "raylib.h"
+#define fieldSize 10
 
 void drawField();
 void generateBomb();
@@ -10,8 +11,6 @@ void playerInput();
 void wonOrLoose();
 void drawScore();
 void mainMenu();
-
-#define fieldSize 10
 
 bool isCovered[fieldSize][fieldSize] = {true};
 int fieldValue[fieldSize][fieldSize] = {0};
