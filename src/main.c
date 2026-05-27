@@ -224,6 +224,9 @@ void drawBomb() {
 //Functions to draw all numbers under grass
 void drawNumber() {
     numberField(100 , 0 , 1);
+}
+//Function to Draw all flags
+void drawFlag() {
     flagField(150 , 0);
 }
 
@@ -232,4 +235,5 @@ void drawField() {
     drawGrass();
     drawNumber();
     drawBomb();
+    drawFlag();
 }
