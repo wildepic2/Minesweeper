@@ -16,7 +16,7 @@ jobs:
             artifact_name: minesweeper-linux-v${{ github.run_number }}
             executable_name: Minesweeper
           - os: windows-latest
-            artifact_name: minesweeper-window-v${{ github.run_number }}
+            artifact_name: minesweeper-windows-v${{ github.run_number }}
             executable_name: Minesweeper.exe
 
     runs-on: ${{ matrix.os }}
