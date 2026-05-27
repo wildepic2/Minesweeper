@@ -22,10 +22,10 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            artifact_name: linux-build
+            artifact_name: linux-build-${{ github.run_number }}
             executable_name: Minesweeper
           - os: windows-latest
-            artifact_name: windows-build
+            artifact_name: windows-build-${{ github.run_number }}
             executable_name: Minesweeper.exe
 
     runs-on: ${{ matrix.os }}
