@@ -21,6 +21,7 @@ enum {
 bool isCovered[fieldSize][fieldSize];
 bool isBomb[fieldSize][fieldSize];
 int fieldValue[fieldSize][fieldSize] = {0};
+bool init[1] = {false};
 
 int main(void)
 {
@@ -41,7 +42,7 @@ int main(void)
                 }
                 break;
             case PLAYING:
-
+                drawField();
                 break;
             case GAME_OVER:
                 //endGame();
@@ -60,7 +61,13 @@ void mainMenu() {
     DrawText("Press ENTER to start", 50, 200, 30, BLACK);
 }
 
-void drawGrass(){}
+void drawGrass() {
+    Image parrots = LoadImage("assets/minesweeper_tiles/masked_tile.png");
+    ImageResize(&parrots, 50, 50);
+    Texture2D texture = LoadTextureFromImage(parrots);
+
+    DrawTexture(texture, 10, 10, WHITE);
+}
 void drawBomb(){}
 void drawNumber(){}
 void drawLines(){}
