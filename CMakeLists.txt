@@ -55,11 +55,11 @@ jobs:
       run: |
         mkdir dist
         if [ "${{ runner.os }}" == "Windows" ]; then
-          cp build/Release/${{ matrix.executable_name }} dist/
+          cp build/Release/${{ matrix.executable_name }} dist/Minesweeper/
         else
-          cp build/${{ matrix.executable_name }} dist/
+          cp build/${{ matrix.executable_name }} dist/Minesweeper/
         fi
-        if [ -d "assets" ]; then cp -r assets dist/; fi
+        if [ -d "assets" ]; then cp -r assets dist/Minesweeper/; fi
       shell: bash
 
     - name: Upload Artifacts
