@@ -11,6 +11,10 @@ void playerInput();
 void wonOrLoose();
 void drawScore();
 void mainMenu();
+void initGrassTexture();
+void initGame();
+
+Texture2D grassTexture;
 
 enum {
     PLAYING,
@@ -19,15 +23,20 @@ enum {
 } gameState = MAIN_MENU;
 
 bool isCovered[fieldSize][fieldSize];
+bool isBomb[fieldSize][fieldSize];
 int fieldValue[fieldSize][fieldSize] = {0};
+bool init[1] = {false};
 
 int main(void)
 {
-    const int screenWidth = 450;
-    const int screenHeight = 450;
+    const int screenWidth = 500;
+    const int screenHeight = 500;
 
     InitWindow(screenWidth, screenHeight, "MINESWEEPER");
     SetTargetFPS(60);
+    BeginDrawing();
+    initGame();
+    EndDrawing();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -35,12 +44,12 @@ int main(void)
         switch (gameState) {
             case MAIN_MENU:
                 mainMenu();
-                if (IsKeyDown(KEY_ENTER)) {
+                if (IsKeyDown(KEY_SPACE)) {
                     gameState = PLAYING;
                 }
                 break;
             case PLAYING:
-
+                drawField();
                 break;
             case GAME_OVER:
                 //endGame();
@@ -53,8 +62,37 @@ int main(void)
     return 0;
 }
 
+void initGame() {
+    initGrassTexture();
+}
+
 void mainMenu() {
     DrawText("Minesweeper", 70, 40, 50, BLACK);
     DrawText("By Raphael Botond Jonas", 100, 100, 20, BLACK);
-    DrawText("Press ENTER to start", 50, 200, 30, BLACK);
+    DrawText("Press SPACE to start", 50, 200, 30, BLACK);
+}
+
+void initGrassTexture() {
+    Image grass = LoadImage("assets/minesweeper_tiles/masked_tile.png");
+    ImageResize(&grass, 50, 50);
+    grassTexture = LoadTextureFromImage(grass);
+
+}
+
+void grassField(int x , int y) {
+    DrawTexture(grassTexture, x, y, WHITE);
+}
+
+void drawGrass() {
+ grassField(0 , 0);
+}
+void drawBomb(){}
+void drawNumber(){}
+void drawLines(){}
+
+void drawField() {
+    drawGrass();
+    drawNumber();
+    drawBomb();
+    drawLines();
 }
