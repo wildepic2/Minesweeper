@@ -1,7 +1,4 @@
-#include <math.h>
-
 #include "raylib.h"
-#include <stdio.h>
 #define fieldSize 10
 
 //Function to Draw Fields
@@ -53,6 +50,8 @@ void initNumber5Texture();
 
 void initFlagTexture();
 
+void resetGrass();
+
 //Textures for Images
 Texture2D grassTexture;
 Texture2D explodedTexture;
@@ -81,6 +80,8 @@ bool isFlag[fieldSize][fieldSize];
 int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void) {
+    //Makes all covered in grass
+    resetGrass();
     //Windows size
     const int screenWidth = 500;
     const int screenHeight = 500;
@@ -136,14 +137,13 @@ void initGame() {
     initNumber4Texture();
     initNumber5Texture();
     initFlagTexture();
+}
 
+//Covers all with grass for every new round
+void resetGrass() {
     for (int i = 0; i < fieldSize; i++) {
         for (int j = 0; j < fieldSize; j++) {
-            isCovered[i][j] = false;
-            isBomb[1][1] = true;
-            isCovered[3][3] = true;
-            isFlag[1][4] = true;
-            fieldValue[i][j] = i;
+            isCovered[i][j] = true;
         }
     }
 }
@@ -236,20 +236,15 @@ void flagField(int x, int y) {
 void numberField(int x, int y, int number) {
     if (number == 1) {
         DrawTexture(number1, x, y, WHITE);
-    }
-    else if (number == 2) {
+    } else if (number == 2) {
         DrawTexture(number2, x, y, WHITE);
-    }
-    else if (number == 3) {
+    } else if (number == 3) {
         DrawTexture(number3, x, y, WHITE);
-    }
-    else if (number == 4) {
+    } else if (number == 4) {
         DrawTexture(number4, x, y, WHITE);
-    }
-    else if (number == 5) {
+    } else if (number == 5) {
         DrawTexture(number5, x, y, WHITE);
-    }
-    else{
+    } else {
         DrawTexture(number0, x, y, WHITE);
     }
 }
