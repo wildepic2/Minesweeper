@@ -34,7 +34,10 @@ int main(void)
         ClearBackground(RAYWHITE);
         switch (gameState) {
             case MAIN_MENU:
-                //mainMenu();
+                mainMenu();
+                if (IsKeyDown(KEY_ENTER)) {
+                    gameState = PLAYING;
+                }
                 break;
             case PLAYING:
 
@@ -48,4 +51,10 @@ int main(void)
 
     CloseWindow();
     return 0;
+}
+
+void mainMenu() {
+    DrawText("Minesweeper", 70, 40, 50, BLACK);
+    DrawText("By Raphael Botond Jonas", 100, 100, 20, BLACK);
+    DrawText("Press ENTER to start", 50, 200, 30, BLACK);
 }
