@@ -18,7 +18,7 @@ enum {
     MAIN_MENU
 } gameState = MAIN_MENU;
 
-bool isCovered[fieldSize][fieldSize] = {true};
+bool isCovered[fieldSize][fieldSize];
 bool isBomb[fieldSize][fieldSize];
 int fieldValue[fieldSize][fieldSize] = {0};
 
@@ -60,10 +60,10 @@ void mainMenu() {
     DrawText("Press ENTER to start", 50, 200, 30, BLACK);
 }
 
-void drawGrass();
-void drawBomb();
-void drawNumber();
-void drawLines();
+void drawGrass(){}
+void drawBomb(){}
+void drawNumber(){}
+void drawLines(){}
 
 void drawField() {
     drawGrass();
