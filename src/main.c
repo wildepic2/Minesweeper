@@ -174,7 +174,7 @@ void initNumber5Texture() {
 }
 
 void initFlagTexture() {
-    Image field = LoadImage("assets/minesweeper_tiles/masked_tile_flag.png");
+    Image field = LoadImage("assets/minesweeper_tiles/masked_tile_flag_blue.png");
     ImageResize(&field, 50, 50);
     flag = LoadTextureFromImage(field);
 }
