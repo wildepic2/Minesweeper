@@ -61,6 +61,8 @@ void mainMenu() {
     DrawText("Press ENTER to start", 50, 200, 30, BLACK);
 }
 
-void drawField() {
+void drawGrass();
 
+void drawField() {
+    drawGrass();
 }
