@@ -13,8 +13,10 @@ void drawScore();
 void mainMenu();
 void initGrassTexture();
 void initGame();
+void initExplodedTexture();
 
 Texture2D grassTexture;
+Texture2D explodedTexture;
 
 enum {
     PLAYING,
@@ -64,6 +66,7 @@ int main(void)
 
 void initGame() {
     initGrassTexture();
+    initExplodedTexture();
 }
 
 void mainMenu() {
@@ -76,6 +79,12 @@ void initGrassTexture() {
     Image grass = LoadImage("assets/minesweeper_tiles/masked_tile.png");
     ImageResize(&grass, 50, 50);
     grassTexture = LoadTextureFromImage(grass);
+}
+
+void initExplodedTexture() {
+    Image exploded = LoadImage("assets/minesweeper_tiles/tile_exploded.png");
+    ImageResize(&exploded, 50, 50);
+    explodedTexture = LoadTextureFromImage(exploded);
 
 }
 
@@ -83,16 +92,20 @@ void grassField(int x , int y) {
     DrawTexture(grassTexture, x, y, WHITE);
 }
 
-void drawGrass() {
- grassField(0 , 0);
+void explodedField(int x , int y) {
+    DrawTexture(explodedTexture, x, y, WHITE);
 }
-void drawBomb(){}
+
+void drawGrass() {
+    grassField(0 , 0);
+}
+void drawBomb() {
+    explodedField(50 , 0);
+}
 void drawNumber(){}
-void drawLines(){}
 
 void drawField() {
     drawGrass();
     drawNumber();
     drawBomb();
-    drawLines();
 }
