@@ -23,7 +23,7 @@ int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void)
 {
-    const int screenWidth = 800;
+    const int screenWidth = 450;
     const int screenHeight = 450;
 
     InitWindow(screenWidth, screenHeight, "MINESWEEPER");
