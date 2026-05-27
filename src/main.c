@@ -24,8 +24,8 @@ int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void)
 {
-    const int screenWidth = 1000;
-    const int screenHeight = 800;
+    const int screenWidth = 500;
+    const int screenHeight = 500;
 
     InitWindow(screenWidth, screenHeight, "MINESWEEPER");
     SetTargetFPS(60);
