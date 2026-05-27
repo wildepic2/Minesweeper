@@ -19,6 +19,8 @@ enum {
 } gameState = MAIN_MENU;
 
 bool isCovered[fieldSize][fieldSize];
+bool isBomb[fieldSize][fieldSize];
+
 int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void)
