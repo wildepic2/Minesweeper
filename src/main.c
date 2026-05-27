@@ -66,4 +66,6 @@ void drawNumber();
 
 void drawField() {
     drawGrass();
+    drawNumber();
+    drawBomb();
 }
