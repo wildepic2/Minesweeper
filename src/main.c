@@ -61,12 +61,16 @@ void mainMenu() {
     DrawText("Press ENTER to start", 50, 200, 30, BLACK);
 }
 
-void drawGrass() {
-    Image parrots = LoadImage("assets/minesweeper_tiles/masked_tile.png");
-    ImageResize(&parrots, 50, 50);
-    Texture2D texture = LoadTextureFromImage(parrots);
+void grassField(int x , int y) {
+    Image grass = LoadImage("assets/minesweeper_tiles/masked_tile.png");
+    ImageResize(&grass, 50, 50);
+    Texture2D texture = LoadTextureFromImage(grass);
 
-    DrawTexture(texture, 10, 10, WHITE);
+    DrawTexture(texture, x, y, WHITE);
+}
+
+void drawGrass() {
+ grassField(0 , 0);
 }
 void drawBomb(){}
 void drawNumber(){}
