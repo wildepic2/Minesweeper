@@ -55,6 +55,8 @@ enum {
 bool isCovered[fieldSize][fieldSize];
 //Is bomb on field x y
 bool isBomb[fieldSize][fieldSize];
+//Is flag on field x y
+bool isFlag[fieldSize][fieldSize];
 //What number does the field have
 int fieldValue[fieldSize][fieldSize] = {0};
 
