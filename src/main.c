@@ -1,4 +1,7 @@
+#include <math.h>
+
 #include "raylib.h"
+#include <stdio.h>
 #define fieldSize 10
 
 //Function to Draw Fields
@@ -133,6 +136,16 @@ void initGame() {
     initNumber4Texture();
     initNumber5Texture();
     initFlagTexture();
+
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            isCovered[i][j] = false;
+            isBomb[1][1] = true;
+            isCovered[3][3] = true;
+            isFlag[1][4] = true;
+            fieldValue[i][j] = i;
+        }
+    }
 }
 
 //Texts for Main menu
@@ -221,44 +234,68 @@ void flagField(int x, int y) {
 
 //Shows the correct number under grass
 void numberField(int x, int y, int number) {
-    if (number == 0) {
-        DrawTexture(number0, x, y, WHITE);
-    }
     if (number == 1) {
         DrawTexture(number1, x, y, WHITE);
     }
-    if (number == 2) {
+    else if (number == 2) {
         DrawTexture(number2, x, y, WHITE);
     }
-    if (number == 3) {
+    else if (number == 3) {
         DrawTexture(number3, x, y, WHITE);
     }
-    if (number == 4) {
+    else if (number == 4) {
         DrawTexture(number4, x, y, WHITE);
     }
-    if (number == 5) {
+    else if (number == 5) {
         DrawTexture(number5, x, y, WHITE);
+    }
+    else{
+        DrawTexture(number0, x, y, WHITE);
     }
 }
 
 //Functions to draw all grass
 void drawGrass() {
-    grassField(0, 0);
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            if (isCovered[i][j] == true) {
+                grassField(i * 50, j * 50);
+            }
+        }
+    }
 }
 
 //Functions to draw all bomb under grass
 void drawBomb() {
-    explodedField(50, 0);
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            if (isBomb[i][j] == true && isCovered[i][j] == false) {
+                explodedField(i * 50, j * 50);
+            }
+        }
+    }
 }
 
 //Functions to draw all numbers under grass
 void drawNumber() {
-    numberField(100, 0, 0);
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            if (isCovered[i][j] == false && isBomb[i][j] == false) {
+                numberField(i * 50, j * 50, fieldValue[i][j]);
+            }
+        }
+    }
 }
 
 //Function to Draw all flags
 void drawFlag() {
-    flagField(150, 0);
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            if (isFlag[i][j] == true && isCovered[i][j] == false) {
+                flagField(i * 50, j * 50);
+            }
+        }
+    }
 }
 
 //Main call for draw fields what calls subfunctions
