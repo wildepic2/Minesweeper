@@ -37,7 +37,7 @@ int main(void)
         switch (gameState) {
             case MAIN_MENU:
                 mainMenu();
-                if (IsKeyDown(KEY_ENTER)) {
+                if (IsKeyDown(KEY_SPACE)) {
                     gameState = PLAYING;
                 }
                 break;
@@ -58,7 +58,7 @@ int main(void)
 void mainMenu() {
     DrawText("Minesweeper", 70, 40, 50, BLACK);
     DrawText("By Raphael Botond Jonas", 100, 100, 20, BLACK);
-    DrawText("Press ENTER to start", 50, 200, 30, BLACK);
+    DrawText("Press SPACE to start", 50, 200, 30, BLACK);
 }
 
 void grassField(int x , int y) {
