@@ -86,9 +86,9 @@ void initGame() {
 
 //Texts for Main menu
 void mainMenu() {
-    DrawText("Minesweeper", 70, 40, 50, BLACK);
-    DrawText("By Raphael Botond Jonas", 100, 100, 20, BLACK);
-    DrawText("Press SPACE to start", 50, 200, 30, BLACK);
+    DrawText("Minesweeper", 80, 40, 50, BLACK);
+    DrawText("By Raphael Botond Jonas", 110, 100, 20, BLACK);
+    DrawText("Press SPACE to start", 60, 200, 30, BLACK);
 }
 
 //Init GRASS Texture
