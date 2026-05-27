@@ -61,6 +61,8 @@ void mainMenu() {
 }
 
 void drawGrass();
+void drawBomb();
+void drawNumber();
 
 void drawField() {
     drawGrass();
