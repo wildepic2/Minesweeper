@@ -253,7 +253,7 @@ void drawBomb() {
 
 //Functions to draw all numbers under grass
 void drawNumber() {
-    numberField(100, 0, 1);
+    numberField(100, 0, 0);
 }
 
 //Function to Draw all flags
