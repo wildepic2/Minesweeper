@@ -58,3 +58,7 @@ void mainMenu() {
     DrawText("By Raphael Botond Jonas", 100, 100, 20, BLACK);
     DrawText("Press ENTER to start", 50, 200, 30, BLACK);
 }
+
+void drawField() {
+
+}
