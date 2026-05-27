@@ -264,7 +264,7 @@ void drawFlag() {
 //Main call for draw fields what calls subfunctions
 void drawField() {
     drawGrass();
-    drawNumber();
     drawBomb();
+    drawNumber();
     drawFlag();
 }
