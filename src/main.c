@@ -159,9 +159,9 @@ void mainMenu() {
     drawGrass();
     DrawText("Minesweeper", 80, 40, 50, BLACK);
     DrawText("By Raphael Botond Jonas", 110, 100, 20, BLACK);
-    DrawText("Press SPACE to start", 10, 200, 20, RED);
-    DrawText("Press Left Mouse Button to Uncover", 10, 230, 20, RED);
-    DrawText("Press Right Mouse Button to Flag", 10, 260, 20, RED);
+    DrawText("Press SPACE to start", 10, 200, 25, BLACK);
+    DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, BLACK);
+    DrawText("Press Right Mouse Button to Flag", 10, 260, 25, BLACK);
 }
 
 //Init GRASS Texture
