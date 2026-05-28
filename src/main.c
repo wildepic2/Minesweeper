@@ -1,6 +1,8 @@
 #include "raylib.h"
 #include <stdio.h>
 #define fieldSize 10
+//Defines how many bombs they are maximal in other words every Bomb has one flag
+#define maxFlags 10
 
 //Function to Draw Fields
 void drawField();
@@ -48,6 +50,7 @@ void initNumber5Texture();
 void initFlagTexture();
 
 void resetGrass();
+
 //Funnktion to draw grass
 void drawGrass();
 
@@ -65,6 +68,8 @@ Texture2D flag;
 //Last clicked position for all placement
 int lastClickedX;
 int lastClickedY;
+//Counts how many flags are available
+int flagsLeft = maxFlags;
 
 //State of Game
 enum {
@@ -162,6 +167,7 @@ void mainMenu() {
     DrawText("Press SPACE to start", 10, 200, 25, BLACK);
     DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, BLACK);
     DrawText("Press Right Mouse Button to Flag", 10, 260, 25, BLACK);
+    DrawText("FIND THE 10 BOMBS", 90, 310, 25, RED);
 }
 
 //Init GRASS Texture
@@ -328,8 +334,20 @@ void playerInput() {
                 //If the field is covered and right button is pressed it places a flag
                 //If you right click again it removes the flag
                 else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+                    //It only works if the field is covered
                     if (isCovered[i][j] == true) {
-                        isFlag[i][j] = !isFlag[i][j];
+                        //If its flag on field it removes the flag
+                        //And adds one flag to the usable ones
+                        if (isFlag[i][j] == true) {
+                            isFlag[i][j] = false;
+                            flagsLeft++;
+                        }
+                        //If there isnt any flag it adds one flag but removes one flag from the usable ones
+                        //If there are no flags left it does nothing
+                        else if (isFlag[i][j] == false && flagsLeft > 0) {
+                            isFlag[i][j] = true;
+                            flagsLeft--;
+                        }
                     }
                 }
             }
