@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include <stdio.h>
 #define fieldSize 10
 
 //Function to Draw Fields
@@ -27,7 +28,6 @@ void drawScore();
 
 //startmenu
 void mainMenu();
-
 
 //Init Functions
 void initGrassTexture();
@@ -62,6 +62,10 @@ Texture2D number3;
 Texture2D number4;
 Texture2D number5;
 Texture2D flag;
+
+//Last clicked position for all placement
+int lastClickedX;
+int lastClickedY;
 
 //State of Game
 enum {
@@ -112,6 +116,9 @@ int main(void) {
                 }
                 break;
             case PLAYING:
+                //Player Input function
+                //Also it needs to be before draw field because it needs to check if you clicked on a bomb or not and show if its an bomb
+                playerInput();
                 //Draws all
                 drawField();
                 break;
@@ -286,7 +293,7 @@ void drawNumber() {
 void drawFlag() {
     for (int i = 0; i < fieldSize; i++) {
         for (int j = 0; j < fieldSize; j++) {
-            if (isFlag[i][j] == true && isCovered[i][j] == false) {
+            if (isFlag[i][j] == true) {
                 flagField(i * 50, j * 50);
             }
         }
@@ -299,4 +306,30 @@ void drawField() {
     drawBomb();
     drawNumber();
     drawFlag();
+}
+
+void playerInput() {
+    int i =0;
+    int j = 0;
+    //Input functions
+    for (i = 0; i < fieldSize; i++) {
+        for (j = 0; j < fieldSize; j++) {
+            //Checks if the mouse is on which field and gets back the x and y of field
+            if (GetMouseX() > i * 50 && GetMouseX() < (i + 1) * 50 && GetMouseY() > j * 50 && GetMouseY() < (j + 1) * 50) {
+                //If left button is pressed and there is no flag it uncovers the field
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                    if (isFlag[i][j] == false) {
+                        isCovered[i][j] = false;
+                    }
+                }
+                //If the field is covered and right button is pressed it places a flag
+                //If you right click again it removes the flag
+                else if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+                    if (isCovered[i][j] == true) {
+                        isFlag[i][j] = !isFlag[i][j];
+                    }
+                }
+            }
+        }
+    }
 }
