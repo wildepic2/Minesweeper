@@ -48,6 +48,8 @@ void initNumber5Texture();
 void initFlagTexture();
 
 void resetGrass();
+//Funnktion to draw grass
+void drawGrass();
 
 //Textures for Images
 Texture2D grassTexture;
@@ -154,9 +156,12 @@ void resetGrass() {
 
 //Texts for Main menu
 void mainMenu() {
+    drawGrass();
     DrawText("Minesweeper", 80, 40, 50, BLACK);
     DrawText("By Raphael Botond Jonas", 110, 100, 20, BLACK);
-    DrawText("Press SPACE to start", 60, 200, 30, BLACK);
+    DrawText("Press SPACE to start", 10, 200, 20, BLACK);
+    DrawText("Press Left Mouse Button to Uncover", 10, 230, 20, BLACK);
+    DrawText("Press Right Mouse Button to Flag", 10, 260, 20, BLACK);
 }
 
 //Init GRASS Texture
