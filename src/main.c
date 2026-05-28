@@ -23,9 +23,6 @@ void playerInput();
 //Check If you won or lost
 void wonOrLoose();
 
-//DrawScore
-void drawScore();
-
 //startmenu
 void mainMenu();
 
