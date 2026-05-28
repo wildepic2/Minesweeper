@@ -50,6 +50,7 @@ void initNumber5Texture();
 void initFlagTexture();
 
 void resetGrass();
+
 //Funnktion to draw grass
 void drawGrass();
 
