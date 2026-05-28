@@ -309,13 +309,14 @@ void drawField() {
 }
 
 void playerInput() {
-    int i =0;
+    int i = 0;
     int j = 0;
     //Input functions
     for (i = 0; i < fieldSize; i++) {
         for (j = 0; j < fieldSize; j++) {
             //Checks if the mouse is on which field and gets back the x and y of field
-            if (GetMouseX() > i * 50 && GetMouseX() < (i + 1) * 50 && GetMouseY() > j * 50 && GetMouseY() < (j + 1) * 50) {
+            if (GetMouseX() > i * 50 && GetMouseX() < (i + 1) * 50 && GetMouseY() > j * 50 && GetMouseY() < (j + 1) *
+                50) {
                 //If left button is pressed and there is no flag it uncovers the field
                 if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     if (isFlag[i][j] == false) {
