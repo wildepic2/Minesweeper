@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "time.h"
 #include <stdio.h>
 #define fieldSize 10
 //Defines how many bombs they are maximal in other words every Bomb has one flag
@@ -353,4 +354,19 @@ void playerInput() {
             }
         }
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+void generateBombs() {
+
 }
