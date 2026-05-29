@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "time.h"
 #include <stdio.h>
+#include <stdlib.h>
 #define fieldSize 10
 //Defines how many bombs they are maximal in other words every Bomb has one flag
 #define maxFlags 10
@@ -91,6 +92,7 @@ int fieldValue[fieldSize][fieldSize] = {0};
 int main(void) {
     //Makes all covered in grass
     resetGrass();
+    generateBombs();
     //Windows size
     const int screenWidth = 500;
     const int screenHeight = 500;
@@ -368,9 +370,10 @@ void playerInput() {
 
 
 void generateBombs() {
+    srand(time(NULL));
     for (int i = 0; i < maxFlags; i++) {
-     int x =   GetRandomValue(0, 10);
-        int y =   GetRandomValue(0, 10);
-
+            int x =   rand()% 10;
+            int y =   rand()% 10;
+            isBomb[x][y] = true;
     }
 }
