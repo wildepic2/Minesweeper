@@ -369,10 +369,13 @@ void playerInput() {
 
 
 
+
 void generateBombs() {
     srand(time(NULL));
     for (int i = 0; i < maxFlags; i++) {
+                //generate a random number for the x Coordinate
             int x =   rand()% 10;
+                //generate a random number for the y Coordinate
             int y =   rand()% 10;
             isBomb[x][y] = true;
     }
