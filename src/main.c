@@ -381,5 +381,7 @@ void generateBombs() {
     }
 }
 void calculateNumbers() {
+    for (int i = 0; i < maxFlags; i++) {
 
+    }
 }
