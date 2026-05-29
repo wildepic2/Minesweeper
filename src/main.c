@@ -377,3 +377,6 @@ void generateBombs() {
             isBomb[x][y] = true;
     }
 }
+void calculateNumbers() {
+
+}
