@@ -368,5 +368,9 @@ void playerInput() {
 
 
 void generateBombs() {
+    for (int i = 0; i < maxFlags; i++) {
+     int x =   GetRandomValue(0, 10);
+        int y =   GetRandomValue(0, 10);
 
+    }
 }
