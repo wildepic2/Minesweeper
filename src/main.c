@@ -1,8 +1,10 @@
 #include "raylib.h"
+#include "time.h"
 #include <stdio.h>
+#include <stdlib.h>
 #define fieldSize 10
 //Defines how many bombs they are maximal in other words every Bomb has one flag
-#define maxFlags 10
+#define maxFlags 15
 
 //Function to Draw Fields
 void drawField();
@@ -90,6 +92,8 @@ int fieldValue[fieldSize][fieldSize] = {0};
 int main(void) {
     //Makes all covered in grass
     resetGrass();
+    generateBombs();
+    calculateNumbers();
     //Windows size
     const int screenWidth = 500;
     const int screenHeight = 500;
@@ -167,7 +171,7 @@ void mainMenu() {
     DrawText("Press SPACE to start", 10, 200, 25, BLACK);
     DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, BLACK);
     DrawText("Press Right Mouse Button to Flag", 10, 260, 25, BLACK);
-    DrawText("FIND THE 10 BOMBS", 90, 310, 25, RED);
+    DrawText("FIND THE 15 BOMBS", 90, 310, 25, RED);
 }
 
 //Init GRASS Texture
@@ -351,6 +355,44 @@ void playerInput() {
                     }
                 }
             }
+        }
+    }
+}
+
+void generateBombs() {
+    srand(time(NULL));
+    for (int i = 0; i < maxFlags; i++) {
+        //generate a random number for the x Coordinate
+        int x = rand() % 10;
+        //generate a random number for the y Coordinate
+        int y = rand() % 10;
+        isBomb[x][y] = true;
+    }
+}
+
+void calculateNumbers() {
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            bool isBombFields[8] = {false};
+            int count = 0;
+
+            //Check every field for bombs and teriary is here to check if its on field
+            isBombFields[0] = (i - 1) >= 0 ? isBomb[i - 1][j] : false;
+            isBombFields[1] = (i + 1) < fieldSize ? isBomb[i + 1][j] : false;
+            isBombFields[2] = (j - 1) >=0 ? isBomb[i][j - 1] : false;
+            isBombFields[3] = (j + 1) < fieldSize ? isBomb[i][j + 1] : false;
+            isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0? isBomb[i - 1][j - 1] : false;
+            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) <= fieldSize? isBomb[i + 1][j + 1] : false;
+            isBombFields[6] = (i + 1) < fieldSize && (j - 1) >= 0 ? isBomb[i + 1][j - 1] : false;
+            isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize? isBomb[i - 1][j + 1] : false;
+            //Counts how many bombs they are
+             for (int k = 0; k < 8; k++) {
+                if (isBombFields[k] == true) {
+                    count++;
+                }
+            }
+            //The field value is count of bombs
+            fieldValue[i][j] = count;
         }
     }
 }
