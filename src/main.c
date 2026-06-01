@@ -367,12 +367,30 @@ void generateBombs() {
         int y = rand() % 10;
         isBomb[x][y] = true;
     }
+    calculateNumbers();
 }
 
 void calculateNumbers() {
     for (int i = 0; i < fieldSize; i++) {
         for (int j = 0; j < fieldSize; j++) {
+            bool isBombFields[8];
+            int count = 0;
 
+            isBombFields[0] = isBomb[i-1][j];
+            isBombFields[1] = isBomb[i+1][j];
+            isBombFields[2]  = isBomb[i][j-1];
+            isBombFields[3]  = isBomb[i][j+1];
+            isBombFields[4] =isBomb[i-1][j-1];
+            isBombFields[5]  =isBomb[i+1][j+1];
+            isBombFields[6]  = isBomb[i+1][j-1];
+            isBombFields[7]  =isBomb[i-1][j+1];
+            for (int k = 0; k < 8; k++) {
+                if (isBombFields[i] == true) {
+                    count++;
+                    printf("%d %d count %d\n" , i ,j , count);
+                }
+            }
+            fieldValue[i][j] = count;
         }
     }
 }
