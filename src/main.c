@@ -404,8 +404,8 @@ void calculateNumbers() {
 }
 
 void endgame() {
-
-
+    DrawText("Gameover", 80, 40, 50, RED);
+    DrawText("You can press space to try again", 80, 80, 50, BLUE);
 }
 void wonOrLoose() {
 
