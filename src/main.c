@@ -132,7 +132,7 @@ int main(void) {
                 break;
             case GAME_OVER:
                 endGame();
-                if () {
+                if (true) {
                     resetGrass();
                     if (IsKeyDown(KEY_SPACE)) {
                         gameState = MAIN_MENU;
@@ -408,5 +408,8 @@ void endgame() {
     DrawText("You can press space to try again", 80, 80, 50, BLUE);
 }
 void wonOrLoose() {
+    if (lastClickedX =  && lastClickedY = ) {
+
+    }
 
 }
