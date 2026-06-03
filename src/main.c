@@ -131,9 +131,6 @@ int main(void) {
                 drawField();
                 break;
             case GAME_OVER:
-                resetGrass();
-                generateBombs();
-                calculateNumbers();
                 //endGame();
                 break;
         }
@@ -398,4 +395,7 @@ void calculateNumbers() {
             fieldValue[i][j] = count;
         }
     }
+}
+void endgame(){
+
 }
