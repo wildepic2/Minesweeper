@@ -131,10 +131,13 @@ int main(void) {
                 drawField();
                 break;
             case GAME_OVER:
-                if (IsBomb ) {
-
-                }
                 endGame();
+                if () {
+                    resetGrass();
+                    if (IsKeyDown(KEY_SPACE)) {
+                        gameState = MAIN_MENU;
+                    }
+                }
                 break;
         }
         EndDrawing();
@@ -402,5 +405,8 @@ void calculateNumbers() {
 
 void endgame() {
 
+
+}
+void wonOrLoose() {
 
 }
