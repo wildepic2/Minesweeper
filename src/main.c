@@ -335,12 +335,12 @@ void playerInput() {
             //Checks if the mouse is on which field and gets back the x and y of field
             if (GetMouseX() > i * 50 && GetMouseX() < (i + 1) * 50 && GetMouseY() > j * 50 && GetMouseY() < (j + 1) *
                 50) {
-                lastClickedX = i;
-                lastClickedY = j;
                 //If left button is pressed and there is no flag it uncovers the field
                 if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     if (isFlag[i][j] == false) {
                         isCovered[i][j] = false;
+                        lastClickedX = i;
+                        lastClickedY = j;
                     }
                 }
                 //If the field is covered and right button is pressed it places a flag
