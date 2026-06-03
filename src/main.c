@@ -131,7 +131,10 @@ int main(void) {
                 drawField();
                 break;
             case GAME_OVER:
-                //endGame();
+                if (IsBomb ) {
+
+                }
+                endGame();
                 break;
         }
         EndDrawing();
@@ -379,14 +382,14 @@ void calculateNumbers() {
             //Check every field for bombs and teriary is here to check if its on field
             isBombFields[0] = (i - 1) >= 0 ? isBomb[i - 1][j] : false;
             isBombFields[1] = (i + 1) < fieldSize ? isBomb[i + 1][j] : false;
-            isBombFields[2] = (j - 1) >=0 ? isBomb[i][j - 1] : false;
+            isBombFields[2] = (j - 1) >= 0 ? isBomb[i][j - 1] : false;
             isBombFields[3] = (j + 1) < fieldSize ? isBomb[i][j + 1] : false;
-            isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0? isBomb[i - 1][j - 1] : false;
-            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) <= fieldSize? isBomb[i + 1][j + 1] : false;
+            isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0 ? isBomb[i - 1][j - 1] : false;
+            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) <= fieldSize ? isBomb[i + 1][j + 1] : false;
             isBombFields[6] = (i + 1) < fieldSize && (j - 1) >= 0 ? isBomb[i + 1][j - 1] : false;
-            isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize? isBomb[i - 1][j + 1] : false;
+            isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize ? isBomb[i - 1][j + 1] : false;
             //Counts how many bombs they are
-             for (int k = 0; k < 8; k++) {
+            for (int k = 0; k < 8; k++) {
                 if (isBombFields[k] == true) {
                     count++;
                 }
@@ -396,6 +399,8 @@ void calculateNumbers() {
         }
     }
 }
-void endgame(){
+
+void endgame() {
+
 
 }
