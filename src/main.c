@@ -405,13 +405,21 @@ void calculateNumbers() {
     }
 }
 
-void endgame() {
+void endGame() {
     DrawText("Gameover", 80, 40, 50, RED);
     DrawText("You can press space to try again", 80, 80, 50, BLUE);
 }
-void wonOrLoose() {
-    if (lastClickedX =  && lastClickedY = ) {
 
+void wonOrLoose() {
+    //schaut ob man verliert
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            if (lastClickedX == isBomb[i][j] && lastClickedY == isBomb[i][j]) {
+            }
+        }
     }
 
+    //schaut ob man gewinnt
+    if (true) {
+    }
 }
