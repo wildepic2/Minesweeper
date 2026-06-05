@@ -53,6 +53,12 @@ void initFlagTexture();
 
 void resetGrass();
 
+void öffneLeereFelder(int x, int y);
+
+int leereFelderZählen(int x, int y, bool visited[fieldSize][fieldSize]);
+
+void größtesFeldÖffen();
+
 //Funnktion to draw grass
 void drawGrass();
 
@@ -119,7 +125,9 @@ int main(void) {
                 //Shows main menu
                 mainMenu();
                 //If space down game starts
-                if (IsKeyDown(KEY_SPACE)) {
+                if (IsKeyPressed(KEY_SPACE)) {
+                    resetGame();
+                    größtesFeldÖffen();
                     gameState = PLAYING;
                 }
                 break;
@@ -131,7 +139,7 @@ int main(void) {
                 drawField();
                 break;
             case GAME_OVER:
-                drawField();//muss nochmal gedrawt werden damit man alles sieht
+                drawField(); //muss nochmal gedrawt werden damit man alles sieht
                 endGame();
                 if (IsKeyDown(KEY_SPACE)) {
                     resetGame();
@@ -171,49 +179,49 @@ void resetGrass() {
 //Texts for Main menu
 void mainMenu() {
     drawGrass();
-// Titel mit Rand
-DrawText("Minesweeper", 77, 40, 50, BLACK);
-DrawText("Minesweeper", 83, 40, 50, BLACK);
-DrawText("Minesweeper", 80, 37, 50, BLACK);
-DrawText("Minesweeper", 80, 43, 50, BLACK);
-DrawText("Minesweeper", 78, 38, 50, BLACK);
-DrawText("Minesweeper", 82, 38, 50, BLACK);
-DrawText("Minesweeper", 78, 42, 50, BLACK);
-DrawText("Minesweeper", 82, 42, 50, BLACK);
-DrawText("Minesweeper", 80, 40, 50, DARKBLUE);
+    // Titel mit Rand
+    DrawText("Minesweeper", 77, 40, 50, BLACK);
+    DrawText("Minesweeper", 83, 40, 50, BLACK);
+    DrawText("Minesweeper", 80, 37, 50, BLACK);
+    DrawText("Minesweeper", 80, 43, 50, BLACK);
+    DrawText("Minesweeper", 78, 38, 50, BLACK);
+    DrawText("Minesweeper", 82, 38, 50, BLACK);
+    DrawText("Minesweeper", 78, 42, 50, BLACK);
+    DrawText("Minesweeper", 82, 42, 50, BLACK);
+    DrawText("Minesweeper", 80, 40, 50, DARKBLUE);
 
-DrawText("By Raphael Botond Jonas", 108, 100, 20, BLACK);
-DrawText("By Raphael Botond Jonas", 112, 100, 20, BLACK);
-DrawText("By Raphael Botond Jonas", 110, 98, 20, BLACK);
-DrawText("By Raphael Botond Jonas", 110, 102, 20, BLACK);
-DrawText("By Raphael Botond Jonas", 110, 100, 20, DARKGRAY);
+    DrawText("By Raphael Botond Jonas", 108, 100, 20, BLACK);
+    DrawText("By Raphael Botond Jonas", 112, 100, 20, BLACK);
+    DrawText("By Raphael Botond Jonas", 110, 98, 20, BLACK);
+    DrawText("By Raphael Botond Jonas", 110, 102, 20, BLACK);
+    DrawText("By Raphael Botond Jonas", 110, 100, 20, DARKGRAY);
 
-DrawText("Press SPACE to start", 8, 200, 25, BLACK);
-DrawText("Press SPACE to start", 12, 200, 25, BLACK);
-DrawText("Press SPACE to start", 10, 198, 25, BLACK);
-DrawText("Press SPACE to start", 10, 202, 25, BLACK);
-DrawText("Press SPACE to start", 10, 200, 25, BLUE);
+    DrawText("Press SPACE to start", 8, 200, 25, BLACK);
+    DrawText("Press SPACE to start", 12, 200, 25, BLACK);
+    DrawText("Press SPACE to start", 10, 198, 25, BLACK);
+    DrawText("Press SPACE to start", 10, 202, 25, BLACK);
+    DrawText("Press SPACE to start", 10, 200, 25, BLUE);
 
-// Linke Maustaste
-DrawText("Press Left Mouse Button to Uncover", 8, 230, 25, BLACK);
-DrawText("Press Left Mouse Button to Uncover", 12, 230, 25, BLACK);
-DrawText("Press Left Mouse Button to Uncover", 10, 228, 25, BLACK);
-DrawText("Press Left Mouse Button to Uncover", 10, 232, 25, BLACK);
-DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, DARKGREEN);
+    // Linke Maustaste
+    DrawText("Press Left Mouse Button to Uncover", 8, 230, 25, BLACK);
+    DrawText("Press Left Mouse Button to Uncover", 12, 230, 25, BLACK);
+    DrawText("Press Left Mouse Button to Uncover", 10, 228, 25, BLACK);
+    DrawText("Press Left Mouse Button to Uncover", 10, 232, 25, BLACK);
+    DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, DARKGREEN);
 
-// Rechte Maustaste
-DrawText("Press Right Mouse Button to Flag", 8, 260, 25, BLACK);
-DrawText("Press Right Mouse Button to Flag", 12, 260, 25, BLACK);
-DrawText("Press Right Mouse Button to Flag", 10, 258, 25, BLACK);
-DrawText("Press Right Mouse Button to Flag", 10, 262, 25, BLACK);
-DrawText("Press Right Mouse Button to Flag", 10, 260, 25, DARKGREEN);
+    // Rechte Maustaste
+    DrawText("Press Right Mouse Button to Flag", 8, 260, 25, BLACK);
+    DrawText("Press Right Mouse Button to Flag", 12, 260, 25, BLACK);
+    DrawText("Press Right Mouse Button to Flag", 10, 258, 25, BLACK);
+    DrawText("Press Right Mouse Button to Flag", 10, 262, 25, BLACK);
+    DrawText("Press Right Mouse Button to Flag", 10, 260, 25, DARKGREEN);
 
-// Bombenziel
-DrawText("FIND THE 15 BOMBS", 88, 310, 25, BLACK);
-DrawText("FIND THE 15 BOMBS", 92, 310, 25, BLACK);
-DrawText("FIND THE 15 BOMBS", 90, 308, 25, BLACK);
-DrawText("FIND THE 15 BOMBS", 90, 312, 25, BLACK);
-DrawText("FIND THE 15 BOMBS", 90, 310, 25, RED);
+    // Bombenziel
+    DrawText("FIND THE 15 BOMBS", 88, 310, 25, BLACK);
+    DrawText("FIND THE 15 BOMBS", 92, 310, 25, BLACK);
+    DrawText("FIND THE 15 BOMBS", 90, 308, 25, BLACK);
+    DrawText("FIND THE 15 BOMBS", 90, 312, 25, BLACK);
+    DrawText("FIND THE 15 BOMBS", 90, 310, 25, RED);
 }
 
 //Init GRASS Texture
@@ -377,7 +385,7 @@ void playerInput() {
                         isCovered[i][j] = false;
                         lastClickedX = i;
                         lastClickedY = j;
-                        wonOrLoose();//Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
+                        wonOrLoose(); //Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
                 //If the field is covered and right button is pressed it places a flag
@@ -397,7 +405,7 @@ void playerInput() {
                             isFlag[i][j] = true;
                             flagsLeft--;
                         }
-                        wonOrLoose();//Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
+                        wonOrLoose(); //Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
             }
@@ -414,11 +422,9 @@ void generateBombs() {
         int y = rand() % 10;
         if (isBomb[x][y] == false) {
             isBomb[x][y] = true;
-        }
-        else {
+        } else {
             i--;
         }
-
     }
 }
 
@@ -562,5 +568,97 @@ void resetGame() {
     generateBombs();
     calculateNumbers();
 }
-//ich glaub es passt so alles(ungefähr fürs erste) sorry wenn nicht schreibt mir falls ich noch was tun soll ich musste bisschen ai
-//benutzen weil ich bei der Logik probleme hatte und wie man einen Rand macht
+
+void öffneLeereFelder(int x, int y) {
+    //schaut ob es im Spielfeld ist
+    if (x < 0 || x >= fieldSize || y < 0 || y >= fieldSize) {
+        return;
+    }
+    //schaut ob es ein offenes Feld ist
+    if (!isCovered[x][y]) {
+        return;
+    }
+    //schaut ob es eine Bombe ist
+    if (isBomb[x][y]) {
+        return;
+    }
+
+    isCovered[x][y] = false;
+    ///nur wenn da keine Zahl von 1bis4 ist
+    if (fieldValue[x][y] > 0) {
+        return;
+    }
+    //gleiches wie oben alle Felder öffnen
+    öffneLeereFelder(x - 1, y);
+    öffneLeereFelder(x + 1, y);
+    öffneLeereFelder(x, y - 1);
+    öffneLeereFelder(x, y + 1);
+    öffneLeereFelder(x - 1, y - 1);
+    öffneLeereFelder(x + 1, y + 1);
+    öffneLeereFelder(x - 1, y + 1);
+    öffneLeereFelder(x + 1, y - 1);
+}
+
+int leereFelderZählen(int x, int y, bool visited[fieldSize][fieldSize]) {
+    //schaut wieder ob es im Spielbereich ist
+    if (x < 0 || x >= fieldSize || y < 0 || y >= fieldSize) {
+        return 0;
+    }
+    //schaut ob es schon gezählt ist
+    if (visited[x][y]) {
+        return 0;
+    }
+    //schaut ob es eine Bombe ist
+    if (isBomb[x][y]) {
+        return 0;
+    }
+    //markiert besuchtes Feld
+    visited[x][y] = true;
+    // hört auf Felder aufzumachen
+    if (fieldValue[x][y] > 0) {
+        return 1;
+    }
+
+    int count = 1;
+
+    count += leereFelderZählen(x - 1, y, visited);
+    count += leereFelderZählen(x + 1, y, visited);
+    count += leereFelderZählen(x, y - 1, visited);
+    count += leereFelderZählen(x, y + 1, visited);
+    count += leereFelderZählen(x - 1, y - 1, visited);
+    count += leereFelderZählen(x + 1, y + 1, visited);
+    count += leereFelderZählen(x - 1, y + 1, visited);
+    count += leereFelderZählen(x + 1, y - 1, visited);
+    //größe des Gebietes
+    return count;
+}
+
+void größtesFeldÖffen() {
+    //speichern größte Koordinaten und das Gebiet
+    int bestX = -1;
+    int bestY = -1;
+    int bestSize = -1;
+    //ganzes spielfeld dursuchen
+    for (int x = 0; x < fieldSize; x++) {
+        for (int y = 0; y < fieldSize; y++) {
+            //es wird geschauit ob das Feld keine Bombe ist und Null ist dann weiter
+            if (!isBomb[x][y] && fieldValue[x][y] == 0) {
+                //es wird ein neuer Spielbereich gemacht wo alle Felder zu sind
+                bool visited[fieldSize][fieldSize] = {false};
+                //zählt wie groß der Bereich ist
+                int size = leereFelderZählen(x, y, visited);
+                //es schaut ob es wirklich der geößte Bereich ist
+                if (size > bestSize) {
+                    bestSize = size;
+                    bestX = x;
+                    bestY = y;
+                }
+            }
+        }
+    }
+    //bestX wurd -1 und wenn wir eines finden ein leeres Feld wird es
+    if (bestX != -1) {
+        //hier geöffnet
+        öffneLeereFelder(bestX, bestY);
+    }
+}
