@@ -53,11 +53,11 @@ void initFlagTexture();
 
 void resetGrass();
 
-void öffneLeereFelder(int x, int y);
+void oeffneLeereFelder(int x, int y);
 
-int leereFelderZählen(int x, int y, bool visited[fieldSize][fieldSize]);
+int leereFelderZaehlen(int x, int y, bool visited[fieldSize][fieldSize]);
 
-void größtesFeldÖffen();
+void groeßtesFeldOeffnen();
 
 //Funnktion to draw grass
 void drawGrass();
@@ -98,6 +98,7 @@ bool playerWon = false;
 int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void) {
+    srand(time(NULL));
     //Makes all covered in grass
     resetGrass();
     generateBombs();
@@ -127,7 +128,7 @@ int main(void) {
                 //If space down game starts
                 if (IsKeyPressed(KEY_SPACE)) {
                     resetGame();
-                    größtesFeldÖffen();
+                    groeßtesFeldOeffnen();
                     gameState = PLAYING;
                 }
                 break;
@@ -382,6 +383,7 @@ void playerInput() {
                 //If left button is pressed and there is no flag it uncovers the field
                 if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     if (isFlag[i][j] == false) {
+                        oeffneLeereFelder(i , j);
                         isCovered[i][j] = false;
                         lastClickedX = i;
                         lastClickedY = j;
@@ -414,7 +416,6 @@ void playerInput() {
 }
 
 void generateBombs() {
-    srand(time(NULL));
     for (int i = 0; i < maxFlags; i++) {
         //generate a random number for the x Coordinate
         int x = rand() % 10;
@@ -569,7 +570,7 @@ void resetGame() {
     calculateNumbers();
 }
 
-void öffneLeereFelder(int x, int y) {
+void oeffneLeereFelder(int x, int y) {
     //schaut ob es im Spielfeld ist
     if (x < 0 || x >= fieldSize || y < 0 || y >= fieldSize) {
         return;
@@ -589,17 +590,17 @@ void öffneLeereFelder(int x, int y) {
         return;
     }
     //gleiches wie oben alle Felder öffnen
-    öffneLeereFelder(x - 1, y);
-    öffneLeereFelder(x + 1, y);
-    öffneLeereFelder(x, y - 1);
-    öffneLeereFelder(x, y + 1);
-    öffneLeereFelder(x - 1, y - 1);
-    öffneLeereFelder(x + 1, y + 1);
-    öffneLeereFelder(x - 1, y + 1);
-    öffneLeereFelder(x + 1, y - 1);
+    oeffneLeereFelder(x - 1, y);
+    oeffneLeereFelder(x + 1, y);
+    oeffneLeereFelder(x, y - 1);
+    oeffneLeereFelder(x, y + 1);
+    oeffneLeereFelder(x - 1, y - 1);
+    oeffneLeereFelder(x + 1, y + 1);
+    oeffneLeereFelder(x - 1, y + 1);
+    oeffneLeereFelder(x + 1, y - 1);
 }
 
-int leereFelderZählen(int x, int y, bool visited[fieldSize][fieldSize]) {
+int leereFelderZaehlen(int x, int y, bool visited[fieldSize][fieldSize]) {
     //schaut wieder ob es im Spielbereich ist
     if (x < 0 || x >= fieldSize || y < 0 || y >= fieldSize) {
         return 0;
@@ -621,19 +622,19 @@ int leereFelderZählen(int x, int y, bool visited[fieldSize][fieldSize]) {
 
     int count = 1;
 
-    count += leereFelderZählen(x - 1, y, visited);
-    count += leereFelderZählen(x + 1, y, visited);
-    count += leereFelderZählen(x, y - 1, visited);
-    count += leereFelderZählen(x, y + 1, visited);
-    count += leereFelderZählen(x - 1, y - 1, visited);
-    count += leereFelderZählen(x + 1, y + 1, visited);
-    count += leereFelderZählen(x - 1, y + 1, visited);
-    count += leereFelderZählen(x + 1, y - 1, visited);
+    count += leereFelderZaehlen(x - 1, y, visited);
+    count += leereFelderZaehlen(x + 1, y, visited);
+    count += leereFelderZaehlen(x, y - 1, visited);
+    count += leereFelderZaehlen(x, y + 1, visited);
+    count += leereFelderZaehlen(x - 1, y - 1, visited);
+    count += leereFelderZaehlen(x + 1, y + 1, visited);
+    count += leereFelderZaehlen(x - 1, y + 1, visited);
+    count += leereFelderZaehlen(x + 1, y - 1, visited);
     //größe des Gebietes
     return count;
 }
 
-void größtesFeldÖffen() {
+void groeßtesFeldOeffnen() {
     //speichern größte Koordinaten und das Gebiet
     int bestX = -1;
     int bestY = -1;
@@ -646,7 +647,7 @@ void größtesFeldÖffen() {
                 //es wird ein neuer Spielbereich gemacht wo alle Felder zu sind
                 bool visited[fieldSize][fieldSize] = {false};
                 //zählt wie groß der Bereich ist
-                int size = leereFelderZählen(x, y, visited);
+                int size = leereFelderZaehlen(x, y, visited);
                 //es schaut ob es wirklich der geößte Bereich ist
                 if (size > bestSize) {
                     bestSize = size;
@@ -659,6 +660,6 @@ void größtesFeldÖffen() {
     //bestX wurd -1 und wenn wir eines finden ein leeres Feld wird es
     if (bestX != -1) {
         //hier geöffnet
-        öffneLeereFelder(bestX, bestY);
+        oeffneLeereFelder(bestX, bestY);
     }
 }
