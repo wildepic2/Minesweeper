@@ -87,6 +87,8 @@ bool isBomb[fieldSize][fieldSize];
 //Is flag on field x y
 bool isFlag[fieldSize][fieldSize];
 //What number does the field have
+bool playerWon = false;
+//player muss false gesetzt werden damit man nicht einmal gewinnt und dann immer es wird der player zurück gesetzt
 int fieldValue[fieldSize][fieldSize] = {0};
 
 int main(void) {
@@ -104,9 +106,7 @@ int main(void) {
     SetTargetFPS(60);
 
     //Inits all PNGS
-    BeginDrawing();
     initGame();
-    EndDrawing();
 
     while (!WindowShouldClose()) {
         BeginDrawing();
@@ -131,7 +131,12 @@ int main(void) {
                 drawField();
                 break;
             case GAME_OVER:
-                //endGame();
+                drawField();//muss nochmal gedrawt werden damit man alles sieht
+                endGame();
+                if (IsKeyDown(KEY_SPACE)) {
+                    resetGame();
+                    gameState = MAIN_MENU;
+                }
                 break;
         }
         EndDrawing();
@@ -333,6 +338,9 @@ void playerInput() {
                 if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     if (isFlag[i][j] == false) {
                         isCovered[i][j] = false;
+                        lastClickedX = i;
+                        lastClickedY = j;
+                        wonOrLoose();//Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
                 //If the field is covered and right button is pressed it places a flag
@@ -352,6 +360,7 @@ void playerInput() {
                             isFlag[i][j] = true;
                             flagsLeft--;
                         }
+                        wonOrLoose();//Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
             }
@@ -366,7 +375,13 @@ void generateBombs() {
         int x = rand() % 10;
         //generate a random number for the y Coordinate
         int y = rand() % 10;
-        isBomb[x][y] = true;
+        if (isBomb[x][y] == false) {
+            isBomb[x][y] = true;
+        }
+        else {
+            i--;
+        }
+
     }
 }
 
@@ -379,14 +394,14 @@ void calculateNumbers() {
             //Check every field for bombs and teriary is here to check if its on field
             isBombFields[0] = (i - 1) >= 0 ? isBomb[i - 1][j] : false;
             isBombFields[1] = (i + 1) < fieldSize ? isBomb[i + 1][j] : false;
-            isBombFields[2] = (j - 1) >=0 ? isBomb[i][j - 1] : false;
+            isBombFields[2] = (j - 1) >= 0 ? isBomb[i][j - 1] : false;
             isBombFields[3] = (j + 1) < fieldSize ? isBomb[i][j + 1] : false;
-            isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0? isBomb[i - 1][j - 1] : false;
-            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) <= fieldSize? isBomb[i + 1][j + 1] : false;
+            isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0 ? isBomb[i - 1][j - 1] : false;
+            isBombFields[5] = (i + 1) < fieldSize && (j + 1) < fieldSize ? isBomb[i + 1][j + 1] : false;
             isBombFields[6] = (i + 1) < fieldSize && (j - 1) >= 0 ? isBomb[i + 1][j - 1] : false;
-            isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize? isBomb[i - 1][j + 1] : false;
+            isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize ? isBomb[i - 1][j + 1] : false;
             //Counts how many bombs they are
-             for (int k = 0; k < 8; k++) {
+            for (int k = 0; k < 8; k++) {
                 if (isBombFields[k] == true) {
                     count++;
                 }
@@ -396,3 +411,119 @@ void calculateNumbers() {
         }
     }
 }
+
+void endGame() {
+    if (playerWon) {
+        //schwarzer Rand für game over
+        DrawText("YOU WON!", 117, 40, 50, BLACK);
+        DrawText("YOU WON!", 123, 40, 50, BLACK);
+        DrawText("YOU WON!", 120, 37, 50, BLACK);
+        DrawText("YOU WON!", 120, 43, 50, BLACK);
+        DrawText("YOU WON!", 118, 38, 50, BLACK);
+        DrawText("YOU WON!", 122, 38, 50, BLACK);
+        DrawText("YOU WON!", 118, 42, 50, BLACK);
+        DrawText("YOU WON!", 122, 42, 50, BLACK);
+        //Normaler Text
+        DrawText("YOU WON!", 120, 40, 50, GREEN);
+
+        //Rand für blauen Text
+        DrawText("Press SPACE to play", 8, 160, 45, BLACK);
+        DrawText("Press SPACE to play", 12, 160, 45, BLACK);
+        DrawText("Press SPACE to play", 10, 158, 45, BLACK);
+        DrawText("Press SPACE to play", 10, 162, 45, BLACK);
+        //normaler blauer Text
+        DrawText("Press SPACE to play", 10, 160, 45, BLUE);
+
+        //dickerer Rand
+        DrawText("again", 8, 210, 45, BLACK);
+        DrawText("again", 12, 210, 45, BLACK);
+        DrawText("again", 10, 208, 45, BLACK);
+        DrawText("again", 10, 212, 45, BLACK);
+        //dickeres Blau
+        DrawText("again", 10, 210, 45, BLUE);
+    } else {
+        //schwarzer Rand für game over
+        DrawText("GAME OVER", 117, 40, 50, BLACK);
+        DrawText("GAME OVER", 123, 40, 50, BLACK);
+        DrawText("GAME OVER", 120, 37, 50, BLACK);
+        DrawText("GAME OVER", 120, 43, 50, BLACK);
+        DrawText("GAME OVER", 118, 38, 50, BLACK);
+        DrawText("GAME OVER", 122, 38, 50, BLACK);
+        DrawText("GAME OVER", 118, 42, 50, BLACK);
+        DrawText("GAME OVER", 122, 42, 50, BLACK);
+        //game over Text in rot
+        DrawText("GAME OVER", 120, 40, 50, RED);
+
+        //Rand for Press Space to try again, aber abgeschnitten weil again geht sich nicht bei 500x 500 aus
+        DrawText("Press SPACE to try", 8, 160, 45, BLACK);
+        DrawText("Press SPACE to try", 12, 160, 45, BLACK);
+        DrawText("Press SPACE to try", 10, 158, 45, BLACK);
+        DrawText("Press SPACE to try", 10, 162, 45, BLACK);
+        DrawText("Press SPACE to try", 10, 160, 45, BLUE);
+
+        //Rand für again
+        DrawText("again", 8, 210, 45, BLACK);
+        DrawText("again", 12, 210, 45, BLACK);
+        DrawText("again", 10, 208, 45, BLACK);
+        DrawText("again", 10, 212, 45, BLACK);
+        //hier again bisschen weiter unten
+        DrawText("again", 10, 210, 45, BLUE);
+    }
+}
+
+void wonOrLoose() {
+    // VERLOREN: Bombe angeklickt
+    if (isBomb[lastClickedX][lastClickedY]) {
+        for (int x = 0; x < fieldSize; x++) {
+            for (int y = 0; y < fieldSize; y++) {
+                isCovered[x][y] = false;
+            }
+        }
+        playerWon = false;
+        gameState = GAME_OVER;
+        return;
+    }
+
+    // GEWONNEN?
+    bool allSafeOpen = true;
+
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            // 1. Alle sicheren Felder müssen offen sein
+            if (!isBomb[i][j] && isCovered[i][j]) {
+                allSafeOpen = false;
+            }
+        }
+    }
+
+    // Sieg nur wenn BEIDES stimmt
+    if (allSafeOpen) {
+        for (int x = 0; x < fieldSize; x++) {
+            for (int y = 0; y < fieldSize; y++) {
+                isCovered[x][y] = false;
+            }
+        }
+        playerWon = true;
+        gameState = GAME_OVER;
+    }
+}
+
+void resetGame() {
+    //alles wird zurück gesetzt
+    for (int i = 0; i < fieldSize; i++) {
+        for (int j = 0; j < fieldSize; j++) {
+            isBomb[i][j] = false;
+            isFlag[i][j] = false;
+            isCovered[i][j] = true;
+            fieldValue[i][j] = 0;
+        }
+    }
+    //für die neue Runde es werden wieder Bomben,Flaggen auf 15beschränkt platziert und das Spiel geht weiter
+    flagsLeft = maxFlags;
+    playerWon = false;
+
+    generateBombs();
+    calculateNumbers();
+}
+//ich glaub es passt so alles(ungefähr fürs erste) sorry wenn nicht schreibt mir falls ich noch was tun soll ich musste bisschen ai
+//benutzen weil ich bei der Logik probleme hatte und wie man einen Rand macht
