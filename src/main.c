@@ -397,6 +397,7 @@ void playerInput() {
                             isFlag[i][j] = true;
                             flagsLeft--;
                         }
+                        wonOrLoose();//Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
             }
@@ -411,7 +412,13 @@ void generateBombs() {
         int x = rand() % 10;
         //generate a random number for the y Coordinate
         int y = rand() % 10;
-        isBomb[x][y] = true;
+        if (isBomb[x][y] == false) {
+            isBomb[x][y] = true;
+        }
+        else {
+            i--;
+        }
+
     }
 }
 
@@ -427,7 +434,7 @@ void calculateNumbers() {
             isBombFields[2] = (j - 1) >= 0 ? isBomb[i][j - 1] : false;
             isBombFields[3] = (j + 1) < fieldSize ? isBomb[i][j + 1] : false;
             isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0 ? isBomb[i - 1][j - 1] : false;
-            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) <= fieldSize ? isBomb[i + 1][j + 1] : false;
+            isBombFields[5] = (i + 1) < fieldSize && (j + 1) < fieldSize ? isBomb[i + 1][j + 1] : false;
             isBombFields[6] = (i + 1) < fieldSize && (j - 1) >= 0 ? isBomb[i + 1][j - 1] : false;
             isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize ? isBomb[i - 1][j + 1] : false;
             //Counts how many bombs they are
@@ -516,7 +523,6 @@ void wonOrLoose() {
 
     // GEWONNEN?
     bool allSafeOpen = true;
-    bool allBombsFlagged = true;
 
     for (int i = 0; i < fieldSize; i++) {
         for (int j = 0; j < fieldSize; j++) {
@@ -524,16 +530,11 @@ void wonOrLoose() {
             if (!isBomb[i][j] && isCovered[i][j]) {
                 allSafeOpen = false;
             }
-
-            // 2. Alle Bomben müssen geflaggt sein
-            if (isBomb[i][j] && !isFlag[i][j]) {
-                allBombsFlagged = false;
-            }
         }
     }
 
     // Sieg nur wenn BEIDES stimmt
-    if (allSafeOpen && allBombsFlagged) {
+    if (allSafeOpen) {
         for (int x = 0; x < fieldSize; x++) {
             for (int y = 0; y < fieldSize; y++) {
                 isCovered[x][y] = false;
