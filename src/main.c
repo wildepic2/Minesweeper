@@ -171,12 +171,49 @@ void resetGrass() {
 //Texts for Main menu
 void mainMenu() {
     drawGrass();
-    DrawText("Minesweeper", 80, 40, 50, BLACK);
-    DrawText("By Raphael Botond Jonas", 110, 100, 20, BLACK);
-    DrawText("Press SPACE to start", 10, 200, 25, BLACK);
-    DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, BLACK);
-    DrawText("Press Right Mouse Button to Flag", 10, 260, 25, BLACK);
-    DrawText("FIND THE 15 BOMBS", 90, 310, 25, RED);
+// Titel mit Rand
+DrawText("Minesweeper", 77, 40, 50, BLACK);
+DrawText("Minesweeper", 83, 40, 50, BLACK);
+DrawText("Minesweeper", 80, 37, 50, BLACK);
+DrawText("Minesweeper", 80, 43, 50, BLACK);
+DrawText("Minesweeper", 78, 38, 50, BLACK);
+DrawText("Minesweeper", 82, 38, 50, BLACK);
+DrawText("Minesweeper", 78, 42, 50, BLACK);
+DrawText("Minesweeper", 82, 42, 50, BLACK);
+DrawText("Minesweeper", 80, 40, 50, DARKBLUE);
+
+DrawText("By Raphael Botond Jonas", 108, 100, 20, BLACK);
+DrawText("By Raphael Botond Jonas", 112, 100, 20, BLACK);
+DrawText("By Raphael Botond Jonas", 110, 98, 20, BLACK);
+DrawText("By Raphael Botond Jonas", 110, 102, 20, BLACK);
+DrawText("By Raphael Botond Jonas", 110, 100, 20, DARKGRAY);
+
+DrawText("Press SPACE to start", 8, 200, 25, BLACK);
+DrawText("Press SPACE to start", 12, 200, 25, BLACK);
+DrawText("Press SPACE to start", 10, 198, 25, BLACK);
+DrawText("Press SPACE to start", 10, 202, 25, BLACK);
+DrawText("Press SPACE to start", 10, 200, 25, BLUE);
+
+// Linke Maustaste
+DrawText("Press Left Mouse Button to Uncover", 8, 230, 25, BLACK);
+DrawText("Press Left Mouse Button to Uncover", 12, 230, 25, BLACK);
+DrawText("Press Left Mouse Button to Uncover", 10, 228, 25, BLACK);
+DrawText("Press Left Mouse Button to Uncover", 10, 232, 25, BLACK);
+DrawText("Press Left Mouse Button to Uncover", 10, 230, 25, DARKGREEN);
+
+// Rechte Maustaste
+DrawText("Press Right Mouse Button to Flag", 8, 260, 25, BLACK);
+DrawText("Press Right Mouse Button to Flag", 12, 260, 25, BLACK);
+DrawText("Press Right Mouse Button to Flag", 10, 258, 25, BLACK);
+DrawText("Press Right Mouse Button to Flag", 10, 262, 25, BLACK);
+DrawText("Press Right Mouse Button to Flag", 10, 260, 25, DARKGREEN);
+
+// Bombenziel
+DrawText("FIND THE 15 BOMBS", 88, 310, 25, BLACK);
+DrawText("FIND THE 15 BOMBS", 92, 310, 25, BLACK);
+DrawText("FIND THE 15 BOMBS", 90, 308, 25, BLACK);
+DrawText("FIND THE 15 BOMBS", 90, 312, 25, BLACK);
+DrawText("FIND THE 15 BOMBS", 90, 310, 25, RED);
 }
 
 //Init GRASS Texture
