@@ -397,7 +397,7 @@ void calculateNumbers() {
             isBombFields[2] = (j - 1) >= 0 ? isBomb[i][j - 1] : false;
             isBombFields[3] = (j + 1) < fieldSize ? isBomb[i][j + 1] : false;
             isBombFields[4] = (i - 1) >= 0 && (j - 1) >= 0 ? isBomb[i - 1][j - 1] : false;
-            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) <= fieldSize ? isBomb[i + 1][j + 1] : false;
+            isBombFields[5] = (i + 1) <= fieldSize && (j + 1) < fieldSize ? isBomb[i + 1][j + 1] : false;
             isBombFields[6] = (i + 1) < fieldSize && (j - 1) >= 0 ? isBomb[i + 1][j - 1] : false;
             isBombFields[7] = (i - 1) >= 0 && (j + 1) < fieldSize ? isBomb[i - 1][j + 1] : false;
             //Counts how many bombs they are
@@ -408,6 +408,7 @@ void calculateNumbers() {
             }
             //The field value is count of bombs
             fieldValue[i][j] = count;
+            isCovered[i][j] = false;
         }
     }
 }
