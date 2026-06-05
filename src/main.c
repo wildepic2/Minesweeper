@@ -383,7 +383,7 @@ void playerInput() {
                 //If left button is pressed and there is no flag it uncovers the field
                 if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                     if (isFlag[i][j] == false) {
-                        oeffneLeereFelder(i , j);
+                        oeffneLeereFelder(i, j);
                         isCovered[i][j] = false;
                         lastClickedX = i;
                         lastClickedY = j;
