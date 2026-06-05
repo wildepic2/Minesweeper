@@ -25,7 +25,7 @@ void endGame();
 void playerInput();
 
 //Check If you won or lost
-void wonOrLoose();
+void wonOrLoose(int caseOfCall);
 
 //startmenu
 void mainMenu();
@@ -387,7 +387,7 @@ void playerInput() {
                         isCovered[i][j] = false;
                         lastClickedX = i;
                         lastClickedY = j;
-                        wonOrLoose(); //Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
+                        wonOrLoose(1); //Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
                 //If the field is covered and right button is pressed it places a flag
@@ -407,7 +407,7 @@ void playerInput() {
                             isFlag[i][j] = true;
                             flagsLeft--;
                         }
-                        wonOrLoose(); //Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
+                        wonOrLoose(2); //Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
             }
@@ -515,9 +515,9 @@ void endGame() {
     }
 }
 
-void wonOrLoose() {
+void wonOrLoose(int caseOfCall) {
     // VERLOREN: Bombe angeklickt
-    if (isBomb[lastClickedX][lastClickedY]) {
+    if (isBomb[lastClickedX][lastClickedY] && caseOfCall == 1) {
         for (int x = 0; x < fieldSize; x++) {
             for (int y = 0; y < fieldSize; y++) {
                 isCovered[x][y] = false;
