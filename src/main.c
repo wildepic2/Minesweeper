@@ -360,8 +360,6 @@ void playerInput() {
                             isFlag[i][j] = true;
                             flagsLeft--;
                         }
-                        lastClickedX = i;
-                        lastClickedY = j;
                         wonOrLoose();//Funktion wonorloose aufrufen um zu schauen ob man verloren oder gewonnen hat
                     }
                 }
