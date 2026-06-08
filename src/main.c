@@ -218,11 +218,11 @@ void mainMenu() {
     DrawText("Press Right Mouse Button to Flag", 10, 260, 25, DARKGREEN);
 
     // Bombenziel
-    DrawText("FIND THE 11 BOMBS", 88, 310, 25, BLACK);
-    DrawText("FIND THE 11 BOMBS", 92, 310, 25, BLACK);
-    DrawText("FIND THE 11 BOMBS", 90, 308, 25, BLACK);
-    DrawText("FIND THE 11 BOMBS", 90, 312, 25, BLACK);
-    DrawText("FIND THE 11 BOMBS", 90, 310, 25, RED);
+    DrawText("FIND THE 10 BOMBS", 88, 310, 25, BLACK);
+    DrawText("FIND THE 10 BOMBS", 92, 310, 25, BLACK);
+    DrawText("FIND THE 10 BOMBS", 90, 308, 25, BLACK);
+    DrawText("FIND THE 10 BOMBS", 90, 312, 25, BLACK);
+    DrawText("FIND THE 10 BOMBS", 90, 310, 25, RED);
 }
 
 //Init GRASS Texture
