@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #define fieldSize 10
 //Defines how many bombs they are maximal in other words every Bomb has one flag
-#define maxFlags 11
+#define maxFlags 10
 
 //Function to Draw Fields
 void drawField();
