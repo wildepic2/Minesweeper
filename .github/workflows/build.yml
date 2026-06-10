@@ -10,7 +10,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
             artifact_name: minesweeper-linux-v${{ github.run_number }}
@@ -18,13 +18,15 @@ jobs:
           - os: windows-latest
             artifact_name: minesweeper-windows-v${{ github.run_number }}
             executable_name: Minesweeper.exe
+          - os: macos-latest
+            artifact_name: minesweeper-macos-v${{ github.run_number }}
+            executable_name: Minesweeper
 
     runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
 
-    # This step ensures CMake 4.2 is installed regardless of the runner's default
     - name: Setup CMake 4.2
       uses: lukka/get-cmake@latest
       with:
@@ -45,9 +47,11 @@ jobs:
     - name: Prepare Package Folder
       run: |
         mkdir dist
+        # Logic to handle path differences across OS
         if [ "${{ runner.os }}" == "Windows" ]; then
           cp build/Release/${{ matrix.executable_name }} dist/
         else
+          # Both Linux and macOS usually place the output directly in the build folder
           cp build/${{ matrix.executable_name }} dist/
         fi
         if [ -d "assets" ]; then cp -r assets dist/; fi
