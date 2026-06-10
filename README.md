@@ -46,24 +46,40 @@ numberField(int x, int y, int number) → Zeichnet Zahl
 d. Spiellogik Funktionen:
 
 playerInput() → Linksklick/Rechtsklick
+
 generateBombs() → Platziert Bomben zufällig
+
 calculateNumbers() → Berechnet Nachbarbomben
+
 wonOrLoose() → Prüft ob du Verloren oder Gewonnen hast
+
 resetGame() → Setzt Spiel zurück
+
 resetGrass() → Verdeckt alle Felder neu
+
 öffneLeereFelder(int x, int y) → Öffnet automatisch zusammenhängende leere Felder und Stoppt bei Zahlen, Bomben oder bereits offenen Feldern
+
 leereFelderZählen(int x, int y, bool visited[][]) → Zählt wie groß ein zusammenhängendes leeres Gebiet ist und Nutzt visited damit Felder nicht doppelt gezählt werden
+
 größtesFeldÖffen() → Sucht das größte leere Gebiet und Öffnet dieses Gebiet automatisch beim Spielstart
 
 e. Texturen laden Funktionen: (laden einfache die Texturen)
 
 initGrassTexture()
+
 initExplodedTexture()
+
 initNumber0Texture()
+
 initNumber1Texture()
+
 initNumber2Texture()
+
 initNumber3Texture()
+
 initNumber4Texture()
+
 initNumber5Texture()
+
 initFlagTexture()
 
