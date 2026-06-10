@@ -559,3 +559,13 @@ Es enthält:
 - automatisches Kopieren des `assets`-Ordners
 - Compiler-Warnungen
 - automatischen Build über GitHub Actions für Linux, Windows und macOS
+
+## Hinweis für macOS
+
+Auf macOS sollte das Spiel über das Terminal gestartet werden und nicht direkt per Doppelklick.
+
+Der macOS-Build funktioniert, wenn man zuerst in den Ordner mit der ausführbaren Datei und dem `assets`-Ordner wechselt und das Spiel dann über die Kommandozeile startet:
+
+bash cd path/to/minesweeper-macos ./Minesweeper
+
+Beim direkten Doppelklick kann es passieren, dass das Spiel den `assets`-Ordner nicht findet.
