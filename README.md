@@ -6,6 +6,8 @@ Ziel des Projekts ist es, das klassische Minesweeper-Spielprinzip nachzubauen, w
 
 Wenn der Spieler auf eine Bombe klickt, verliert er das Spiel. Wenn alle sicheren Felder geöffnet wurden, gewinnt der Spieler.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F61XISYB)
+
 ---
 
 ## Inhaltsverzeichnis
